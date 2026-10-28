@@ -71,7 +71,7 @@ console.log("hello");
 //     // console.log(customerList);
 //     localStorage.setItem("customerList", JSON.stringify(customerList));
 //     btnLoadTableOnAction();
-    
+
 // }
 
 // function btnSearchCustomrOnAction() {
@@ -152,17 +152,37 @@ console.log("hello");
 
 
 // ---------------------Weather API---------------------
-const apiKey = "bdf15ef4a1514140b35105030261210";
-const baseUrl = "http://api.weatherapi.com/v1";
+// const apiKey = "bdf15ef4a1514140b35105030261210";
+// const baseUrl = "http://api.weatherapi.com/v1";
 
-fetch(`${baseUrl}/current.json?key=${apiKey}&q=Galle`).then(res => res.json()).then(data =>{
-    console.log(data);
+// fetch(`${baseUrl}/current.json?key=${apiKey}&q=Galle`).then(res => res.json()).then(data =>{
+//     console.log(data);
 
-    document.getElementById("weatherInfo").innerHTML = `
+//     document.getElementById("weatherInfo").innerHTML = `
+//     <div>
+//         <h1>${data.current.condition.text}</h1>
+//         <img src="${data.current.condition.icon}" alt="">
+//         <p>${data.current.temp_c}°C</p>
+//         <p>${data.current.humidity}%</p>
+//     </div>`
+// });
+
+function btnSearchCityOnAction() {
+    let city = document.getElementById("txtcity").value;
+    
+    const apiKey = "bdf15ef4a1514140b35105030261210";
+    const baseUrl = "http://api.weatherapi.com/v1";
+
+    fetch(`${baseUrl}/current.json?key=${apiKey}&q=${city}`).then(res => res.json()).then(data => {
+        console.log(data);
+
+        document.getElementById("weatherInfo").innerHTML = `
     <div>
+        <h1>${data.location.name}</h1>
         <h1>${data.current.condition.text}</h1>
         <img src="${data.current.condition.icon}" alt="">
         <p>${data.current.temp_c}°C</p>
         <p>${data.current.humidity}%</p>
     </div>`
-});
+    });
+}
